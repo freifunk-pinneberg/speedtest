@@ -27,6 +27,16 @@ if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 
 $ip = preg_replace("/^::ffff:/", "", $ip);
 
+//FFPI IP-Adressen
+if(stripos($ip, '10.137') === 0) {
+    echo json_encode(['processedString' => $ip . " - Freifunk Pinneberg", 'rawIspInfo' => ""]);
+    die();
+}
+if(stripos($ip, 'fde8:21c6:9d82') === 0) {
+    echo json_encode(['processedString' => $ip . " - Freifunk Pinneberg", 'rawIspInfo' => ""]);
+    die();
+}
+
 if ($ip == "::1") { // ::1/128 is the only localhost ipv6 address. there are no others, no need to strpos this
     echo json_encode(['processedString' => $ip . " - localhost IPv6 access", 'rawIspInfo' => ""]);
     die();
