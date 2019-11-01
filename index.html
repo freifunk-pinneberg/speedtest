@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
     <link rel="shortcut icon" href="favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no"/>
     <meta charset="UTF-8"/>
+    <meta name="robots" content="noindex" />
     <script type="text/javascript" src="speedtest.js"></script>
     <script type="text/javascript">
         function I(i) {
@@ -33,7 +34,7 @@
 
         //INITIALIZE SPEEDTEST
         var s = new Speedtest(); //create speedtest object
-        s.setParameter("telemetry_level", "basic"); //enable telemetry
+        s.setParameter("telemetry_level", 0); //enable telemetry
         s.addTestPoints(SPEEDTEST_SERVERS); //add list of servers
 
         //SERVER AUTO SELECTION
@@ -527,7 +528,7 @@
             }
         }
     </style>
-    <title>LibreSpeed Example</title>
+    <title>Speedtest - Freifunk Pinneberg</title>
 </head>
 <body onload="initServers()">
 <header id="header" class="o-header">
