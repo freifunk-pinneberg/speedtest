@@ -29,11 +29,11 @@ $ip = preg_replace("/^::ffff:/", "", $ip);
 
 //FFPI IP-Adressen
 if(stripos($ip, '10.137') === 0) {
-    echo json_encode(['processedString' => $ip . " - Freifunk Pinneberg", 'rawIspInfo' => ""]);
+    echo json_encode(['processedString' => $ip . " - Freifunk Pinneberg (Mesh)", 'rawIspInfo' => ""]);
     die();
 }
 if(stripos($ip, 'fde8:21c6:9d82') === 0) {
-    echo json_encode(['processedString' => $ip . " - Freifunk Pinneberg", 'rawIspInfo' => ""]);
+    echo json_encode(['processedString' => $ip . " - Freifunk Pinneberg (Mesh)", 'rawIspInfo' => ""]);
     die();
 }
 
