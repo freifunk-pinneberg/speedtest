@@ -10,17 +10,17 @@ function I(i){return document.getElementById(i);}
 
 //LIST OF TEST SERVERS. See documentation for details if needed
 var SPEEDTEST_SERVERS=[
-	{	//this is my demo server, remove it
-		name:"Speedtest Demo Server (Helsinki)", //user friendly name for the server
-		server:"//fi.openspeed.org/", //URL to the server. // at the beginning will be replaced with http:// or https:// automatically
+	{
+		name:"Gateway04 (Freifunk Intern)", //user friendly name for the server
+		server:"//speedtest.ffpi/", //URL to the server. // at the beginning will be replaced with http:// or https:// automatically
 		dlURL:"garbage.php",  //path to download test on this server (garbage.php or replacement)
 		ulURL:"empty.php",  //path to upload test on this server (empty.php or replacement)
 		pingURL:"empty.php",  //path to ping/jitter test on this server (empty.php or replacement)
 		getIpURL:"getIP.php"  //path to getIP on this server (getIP.php or replacement)
 	},
-	{	//this is my demo server, remove it
-		name:"Old Speedtest Demo Server",
-		server:"//mpotdemo.fdossena.com/",
+	{
+		name:"Gateway04 (Internet)",
+		server:"//speedtest.pinneberg.freifunk.net/",
 		dlURL:"garbage.php",
 		ulURL:"empty.php",
 		pingURL:"empty.php",
@@ -58,8 +58,8 @@ function initServers(){
 }
 
 var meterBk=/Trident.*rv:(\d+\.\d+)/i.test(navigator.userAgent)?"#EAEAEA":"#80808040";
-var dlColor="#6060AA",
-	ulColor="#616161";
+var dlColor="#dc0067",
+	ulColor="#009ee0";
 var progColor=meterBk;
 
 //CODE FOR GAUGES
@@ -173,21 +173,103 @@ function initUI(){
 }
 </script>
 <style type="text/css">
-	html,body{
-		border:none; padding:0; margin:0;
-		background:#FFFFFF;
-		color:#202020;
+	* {
+		box-sizing: border-box;
 	}
-	body{
-		text-align:center;
-		font-family:"Roboto",sans-serif;
+	*, ::before, ::after {
+		box-sizing: border-box;
 	}
-	h1{
-		color:#404040;
+	html {
+		font-family: "Roboto", sans-serif;
+		font-size: 125%;
+		line-height: 1.5em;
+		-ms-text-size-adjust: 100%;
+		-webkit-text-size-adjust: 100%;
+	}
+	body {
+		color:#666;
+		margin: 0;
+		overflow-x: hidden;
+	}
+	header {
+		display: block;
+	}
+	.o-header {
+		display: block;
+		background-color: #ffffff;
+		box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2);
+		padding: 1rem 0;
+	}
+	.h-container {
+		max-width: 1410px;
+		width: 100%;
+		padding-right: 15px;
+		padding-left: 15px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.o-header__inner {
+		display: flex;
+		flex-wrap: wrap;
+		margin-right: -15px;
+		margin-left: -15px;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.o-header__logo {
+		display: flex;
+		align-content: center;
+	}
+	.o-header__logo .logo {
+		width: 60px;
+		margin-right: 10px;
+		transition: transform 1s ease;
+	}
+	.m-brand {
+		align-self: center;
+	}
+	.m-brand__name {
+		font-family: 'Roboto Condensed', Sans-Serif;
+		font-style: normal;
+		font-weight: 700;
+		color: #dc0067;
+		font-size: 1.8rem;
+	}
+	.m-brand__slogan {
+		font-size: 0.8rem;
+	}
+	img, picture, video {
+		max-width: 100%;
+		height: auto;
+	}
+	img {
+		border-style: none;
+	}
+
+	.main {
+		display: block;
+		text-align: center;
+		padding-top: 1rem;
+	}
+
+	h1 {
+		margin: 1.5rem 0;
+		font-family: 'Roboto Condensed', Sans-Serif;
+		font-style: normal;
+		font-weight: 700;
+		color: #dc0067;
+		font-size: 2.5rem;
+		line-height: 1;
+		margin-top: 0;
+	}
+	p {
+		margin: 1.5rem 0;
+		margin-bottom: 2rem;
+		color: #666;
 	}
 	#loading{
 		background-color:#FFFFFF;
-		color:#404040;
+		color:#666;
 		text-align:center;
 	}
 	span.loadCircle{
@@ -205,26 +287,27 @@ function initUI(){
 		100%{transform:rotate(359deg);}
 	}
 	#startStopBtn{
-		display:inline-block;
-		margin:0 auto;
-		color:#6060AA;
-		background-color:rgba(0,0,0,0);
-		border:0.15em solid #6060FF;
-		border-radius:0.3em;
-		transition:all 0.3s;
-		box-sizing:border-box;
-		width:8em; height:3em;
-		line-height:2.7em;
-		cursor:pointer;
-		box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 0 0 0 rgba(0,0,0,0.1);
+		display: inline-block;
+		padding: 12px 50px;
+		text-align: center;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		outline: none;
+		text-decoration: none;
+		border-radius: 3px;
+		background-color: #dc0067;
+		color: #fff;
+		box-shadow: 0px 10px 20px 0px rgba(220, 0, 103, 0.2);
 	}
 	#startStopBtn:hover{
 		box-shadow: 0 0 2em rgba(0,0,0,0.1), inset 0 0 1em rgba(0,0,0,0.1);
 	}
 	#startStopBtn.running{
-		background-color:#FF3030;
-		border-color:#FF6060;
-		color:#FFFFFF;
+		background-color: transparent;
+		color: #dc0067;
+		border: 2px solid #dc0067;
+		box-shadow: none;
 	}
 	#startStopBtn:before{
 		content:"Start";
@@ -370,7 +453,21 @@ function initUI(){
 <title>LibreSpeed Example</title>
 </head>
 <body onload="initServers()">
-<h1>LibreSpeed Example</h1>
+<header id="header" class="o-header">
+	<div class="h-container">
+		<div class="o-header__inner">
+			<div class="o-header__logo">
+				<img class="logo" src="Images/Logo.svg" alt="" width="340" height="340">
+				<div class="m-brand">
+					<div class="m-brand__name">Freifunk Pinneberg</div>
+					<div class="m-brand__slogan">Freies WLAN im Kreis Pinneberg</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<div class="main">
+	<h1>Speedtest</h1>
 <div id="loading" class="visible">
 	<p id="message"><span class="loadCircle"></span>Selecting a server...</p>
 </div>
@@ -456,6 +553,7 @@ function initUI(){
     </p>
     <br/><br/>
     <a class="privacy" href="#" onclick="I('privacyPolicy').style.display='none'">Close</a><br/>
+</div>
 </div>
 </body>
 </html>
